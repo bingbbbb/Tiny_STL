@@ -11,14 +11,18 @@ add_subdirectory(src)
 add_executable(test ./test/test.cpp)
 add_executable(test_vector ./test/test_vector.cpp)
 add_executable(test_list ./test/test_list.cpp)
+add_executable(test_rbtree ./test/test_rbtree.cpp)
+add_executable(test_set ./test/test_set.cpp)
 # 添加链接库
 target_link_libraries(test srcs)
 target_link_libraries(test_vector srcs)
 target_link_libraries(test_list srcs)
+target_link_libraries(test_rbtree srcs)
+target_link_libraries(test_set srcs)
 
 #设置输出目录
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 #设置编译器及编译选项,cmake多线程应加上-pthread
 SET(CMAKE_C_COMPILER g++)
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread ")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -pthread ")

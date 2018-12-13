@@ -1,7 +1,9 @@
 #ifndef TINY_STL_LIST_H
 #define TINY_STL_LIST_H
 
-#include <iostream>
+//#include <iostream>
+#include <initializer_list>
+#include <mutex>
 
 #include "Tiny_STL_alloc.h"
 #include "Tiny_STL_construct.h"
@@ -80,6 +82,26 @@ public:
     typedef simple_alloc<list_node, Alloc>  list_node_allocator;
 
     list() { empty_initialize(); }
+    list(const list<T, Alloc>& x) 
+    {
+        empty_initialize();
+        for (auto iter = x.begin();iter != x.end();++iter)
+        {
+            insert((iterator)node, *iter);
+        }
+    }
+    list(list<T, Alloc>&& x) : node(x.node)
+    {
+        x.empty_initialize();
+    }
+    list(std::initializer_list<T> iniList)
+    {
+        empty_initialize();
+        for (auto iter = iniList.begin();iter != iniList.end();++iter)
+        {
+            insert((iterator)node, *iter);
+        }
+    }
     ~list()
     {
         iterator iter = begin();
@@ -92,8 +114,8 @@ public:
         }
         destroy_node(node);
     }
-    iterator begin() { return (link_type)(node->next); }
-    iterator end()  { return node; }
+    iterator begin() const { return (link_type)(node->next); }
+    iterator end() const { return node; }
     bool empty() const { return node->next == node; }
     size_type size()
     {
