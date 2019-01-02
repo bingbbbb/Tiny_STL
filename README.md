@@ -15,8 +15,8 @@
 * vector
 * list
 * rbtree
-* set  
-TODO：哈希表  
+* set   
+TODO vector实现stack
 红黑树比较难，有些函数是直接抄的，现在还没看懂
 ***
 ***
@@ -33,9 +33,7 @@ TODO：哈希表
 利用移动语义和右值引用，移动构造函数可避免数据拷贝。
 ***
 ### 初始化列表
-一种新的初始化方法  
-TODO：自己实现 initializer_list 类
+一种初始化方法(如 vector<int> vec{1, 2, 5, 7, 9, 3};)  
 ***
 ### 线程安全函数
-目前只实现了vector的部分函数 : push_back_safe, pop_back_safe, wait_pop_back, empty_safe  
-TODO：实现list的线程安全函数，使用细粒度锁，一个节点一个互斥量
+TODO：线程安全stack

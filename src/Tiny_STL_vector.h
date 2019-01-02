@@ -19,6 +19,7 @@ class vector
 typedef T           value_type;
 typedef T*          pointer;
 typedef T&          reference;
+typedef const T&    const_reference;
 typedef size_t      size_type;
 typedef ptrdiff_t   difference_type;
 //定义迭代器
@@ -65,33 +66,6 @@ public:
     }
     reference front() { return *start; }
     reference back() { return *(finish-1); }
-
-    void push_back_safe(const T& x)
-    {
-        std::unique_lock<std::mutex> lock(m);
-        push_back(x);
-        cond.notify_one();
-    }
-    void pop_back_safe(T& x)
-    {
-        std::unique_lock<std::mutex> lock(m);
-        x = back();
-        --finish;
-        destroy(finish);
-    }
-    void wait_pop_back(T& x)
-    {
-        std::unique_lock<std::mutex> lock(m);
-        cond.wait(lock, [this]{return !empty();});
-        x = back();
-        --finish;
-        destroy(finish);
-    }
-    bool empty_safe()
-    {
-        std::unique_lock<std::mutex> lock(m);
-        return empty();
-    }
 
     void push_back(const T& x)
     {
@@ -148,6 +122,7 @@ public:
     size_type capacity() const { return end_of_storage - start; }
     bool empty() const { return start == finish; }
     reference operator[](size_type n) { return *(start + n); }
+    const_reference operator[](size_type n) const { return *(begin() + n); }
 
     //vector(const vector &) = delete;
     const vector &operator=(const vector &) = delete;

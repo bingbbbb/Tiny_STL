@@ -142,34 +142,5 @@ int main()
     print(vec6);
     cout << "size: " << vec6.size() << "  capacity: " << vec6.capacity() << endl;
 
-    //线程安全
-    cout << endl << "线程安全" << endl;
-    std::thread t_array[6];
-    for(int i=0;i<6;i++)
-    {
-        //t_array[i] = std::thread(std::bind(fun_1, std::ref(vec6)));
-        t_array[i] = std::thread(std::bind(fun_2, std::ref(vec6)));
-        /**
-         * 运行第一行的话会core dumped，原因是多个线程同时执行++finish，
-         * 超过end_of_storage
-         * (https://blog.csdn.net/stpeace/article/details/81227459)
-         */
-    }
-    sleep(1);
-    for(int i=0;i<6;i++)
-    {
-        t_array[i].join();
-    }
-    cout << vec6.size() << endl;
-
-    print(vec2);
-    std::thread t1(std::bind(fun_3, std::ref(vec2)));
-    std::thread t2(std::bind(fun_4, std::ref(vec2)));
-    std::thread t3(std::bind(fun_5, std::ref(vec2)));
-    sleep(0.5);
-    t1.join();
-    t2.join();
-    t3.join();
-    print(vec2);
 
 }
