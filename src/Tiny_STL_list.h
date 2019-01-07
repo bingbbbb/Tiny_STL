@@ -186,6 +186,7 @@ public:
         x.node = tmp;
     }
 
+    list<T, Alloc>&operator=(const list<T, Alloc>&) = delete;
 
 private:
     link_type node;

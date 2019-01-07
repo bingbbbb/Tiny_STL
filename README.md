@@ -16,8 +16,7 @@
 * list
 * rbtree
 * set   
-TODO vector实现stack
-红黑树比较难，有些函数是直接抄的，现在还没看懂
+* queue  
 ***
 ***
 ## 基本功能
@@ -35,5 +34,15 @@ TODO vector实现stack
 ### 初始化列表
 一种初始化方法(如 vector<int> vec{1, 2, 5, 7, 9, 3};)  
 ***
+### 智能指针   
+#### my_unique_ptr  
+my_unique_ptr有两个版本：  
+1) 管理个对象（例如以 new 分配）  
+2) 管理动态分配的对象数组（例如以 new[] 分配） 
+
+my_unique_ptr类满足可移动构造和可移动赋值的要求，但不满足可复制构造或可复制赋值的要求。两个版本都支持用make_unique构造，应避免直接使用new构造，否则会有
+代码冗余和异常安全。(《effective modern c++》条款21)  
+TODO： my_weak_ptr, my_shared_ptr
+***
 ### 线程安全函数
-TODO：线程安全stack
+线程安全queue  

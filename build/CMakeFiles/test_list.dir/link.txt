@@ -1,0 +1,1 @@
+/usr/bin/c++    -g -std=c++11 -pthread    CMakeFiles/test_list.dir/test/test_list.cpp.o  -o ../bin/test_list -rdynamic src/libsrcs.a 

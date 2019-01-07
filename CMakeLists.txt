@@ -13,12 +13,16 @@ add_executable(test_vector ./test/test_vector.cpp)
 add_executable(test_list ./test/test_list.cpp)
 add_executable(test_rbtree ./test/test_rbtree.cpp)
 add_executable(test_set ./test/test_set.cpp)
+add_executable(test_queue ./test/test_queue.cpp)
+add_executable(test_ptr ./test/test_ptr.cpp)
 # 添加链接库
 target_link_libraries(test srcs)
 target_link_libraries(test_vector srcs)
 target_link_libraries(test_list srcs)
 target_link_libraries(test_rbtree srcs)
 target_link_libraries(test_set srcs)
+target_link_libraries(test_queue srcs)
+target_link_libraries(test_ptr srcs)
 
 #设置输出目录
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

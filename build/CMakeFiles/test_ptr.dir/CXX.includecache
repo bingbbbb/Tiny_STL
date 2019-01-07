@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bing/CPP/Tiny_STL/src/my_unique_ptr.h
+iostream
+-
+
+/home/bing/CPP/Tiny_STL/test/test_ptr.cpp
+iostream
+-
+memory
+-
+../src/my_unique_ptr.h
+/home/bing/CPP/Tiny_STL/src/my_unique_ptr.h
+

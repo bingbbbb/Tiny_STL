@@ -11,4 +11,4 @@ fi
 cd build
 cmake ..
 make
-../bin/test
+../bin/test_ptr

@@ -124,8 +124,8 @@ public:
     reference operator[](size_type n) { return *(start + n); }
     const_reference operator[](size_type n) const { return *(begin() + n); }
 
-    //vector(const vector &) = delete;
-    const vector &operator=(const vector &) = delete;
+    //vector(const vector<T, Alloc> &) = delete;
+    vector<T, Alloc>&operator=(const vector<T, Alloc>&) = delete;
 
 private:
     void insert_aux(iterator position, const T& value);
