@@ -1,1 +1,0 @@
-/usr/bin/c++    -g -std=c++11 -pthread    CMakeFiles/test_vector.dir/test/test_vector.cpp.o  -o ../bin/test_vector -rdynamic src/libsrcs.a 

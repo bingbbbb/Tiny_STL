@@ -1,1 +1,0 @@
-/usr/bin/c++    -g -std=c++11 -pthread    CMakeFiles/test_rbtree.dir/test/test_rbtree.cpp.o  -o ../bin/test_rbtree -rdynamic src/libsrcs.a 

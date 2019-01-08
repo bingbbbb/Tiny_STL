@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>   //unique_ptr, shared_ptr
 #include "../src/my_unique_ptr.h"
+#include "../src/my_shared_ptr.h"
 using namespace Tiny_STL;
 using std::cout;
 using std::endl;
@@ -45,6 +46,32 @@ int main()
         my_unique_ptr<test[]> ptr5(make_unique<test[]>(6));
         ptr5[1].print();
     }
-    cout << "end" << endl;
-    std::shared_ptr<int> sptr;
+    cout << "end my_unique_ptr test" << endl;
+    cout << "------------------------------" << endl;
+
+    {
+        my_shared_ptr<test> ptr1(make_shared<test>(1));
+        auto ptr2(ptr1);
+        auto ptr3 = ptr2;
+        cout << "ptr1.use_count() = " << ptr1.use_count() << endl;
+        ptr3.reset();
+        ptr3 = std::move(ptr2);
+        cout << "ptr1.use_count() = " << ptr1.use_count() << endl;
+        (*ptr1).print();
+        cout << "ptr2.use_count() = " << ptr2.use_count() << endl;
+    }
+    cout << "end my_shared_ptr test" << endl;
+    cout << "------------------------------" << endl;
+    
+    {
+        my_shared_ptr<test> ptr1(make_shared<test>(1));
+        my_weak_ptr<test> ptr2(ptr1);
+        cout << "ptr1.use_count() = " << ptr1.use_count() << endl;
+        auto ptr3(ptr2.lock());
+        cout << "ptr1.use_count() = " << ptr1.use_count() << endl;
+    }
+    cout << "end my_weak_ptr test" << endl;
+    cout << "------------------------------" << endl;
+
+
 }

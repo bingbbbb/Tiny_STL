@@ -5,6 +5,7 @@
 #include <condition_variable>   //std::condition_variable
 
 #include "my_unique_ptr.h"
+#include "my_shared_ptr.h"
 
 namespace Tiny_STL
 {
@@ -14,7 +15,7 @@ class queue
 private:
 struct node
 {
-    std::shared_ptr<T>      data;
+    my_shared_ptr<T>      data;
     my_unique_ptr<node>   next;
 };
 
@@ -29,8 +30,8 @@ public:
     ~queue() {};
     queue(const queue& other) = delete;
     queue& operator-(const queue& other) = delete;
-    std::shared_ptr<T> try_pop();
-    std::shared_ptr<T> wait_and_pop();
+    my_shared_ptr<T> try_pop();
+    my_shared_ptr<T> wait_and_pop();
     void push(T x);
     bool empty()
     {
@@ -45,9 +46,9 @@ public:
     }
 };
 template<class T>
-std::shared_ptr<T> queue<T>::try_pop()
+my_shared_ptr<T> queue<T>::try_pop()
 {
-    std::shared_ptr<T> res;
+    my_shared_ptr<T> res;
     {
         std::lock_guard<std::mutex> head_lock(head_m);
         if (head.get() != tail)
@@ -60,7 +61,7 @@ std::shared_ptr<T> queue<T>::try_pop()
     return res;
 }
 template<class T>
-std::shared_ptr<T> queue<T>::wait_and_pop()
+my_shared_ptr<T> queue<T>::wait_and_pop()
 {
     std::unique_lock<std::mutex> head_lock(head_m);
     cond.wait(head_lock, [&]{return head.get() != get_tail();});
@@ -71,7 +72,7 @@ std::shared_ptr<T> queue<T>::wait_and_pop()
 template<class T>
 void queue<T>::push(T x)
 {
-    std::shared_ptr<T> new_data(std::make_shared<T>(std::move(x)));
+    my_shared_ptr<T> new_data(make_shared<T>(std::move(x)));
     my_unique_ptr<node> p(new node);
     {
         std::lock_guard<std::mutex> tail_lock(tail_m);

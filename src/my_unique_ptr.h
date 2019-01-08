@@ -1,8 +1,8 @@
 #ifndef SMART_PTR_H
 #define SMART_PTR_H
-#include <iostream>
-using std::cout;
-using std::endl;
+//#include <iostream>
+//using std::cout;
+//using std::endl;
 namespace Tiny_STL
 {
 template<class T>
@@ -15,7 +15,7 @@ public:
         if (ptr != nullptr)
             delete ptr; 
     }
-    my_unique_ptr(T* p) : ptr(p) {}
+    explicit my_unique_ptr(T* p) : ptr(p) {}
     my_unique_ptr(my_unique_ptr<T>&& other) : ptr(other.ptr)
     {
         //cout << " my_unique_ptr(my_unique_ptr<T>&& other)" << endl;
@@ -23,6 +23,8 @@ public:
     }
     my_unique_ptr<T>& operator=(my_unique_ptr<T>&& other)
     {
+        if (ptr == other.ptr)
+            return *this;
         T* old_ptr = ptr;
         ptr = other.ptr;
         other.ptr = nullptr;
@@ -68,7 +70,7 @@ public:
         if (ptr != nullptr)
             delete[] ptr; 
     }
-    my_unique_ptr(T* p) : ptr(p) {}
+    explicit my_unique_ptr(T* p) : ptr(p) {}
     my_unique_ptr(my_unique_ptr<T[]>&& other) : ptr(other.ptr)
     {
         //cout << " my_unique_ptr(my_unique_ptr<T>&& other)" << endl;
@@ -76,6 +78,8 @@ public:
     }
     my_unique_ptr<T[]>& operator=(my_unique_ptr<T[]>&& other)
     {
+        if (ptr == other.ptr)
+            return *this;
         T* old_ptr = ptr;
         ptr = other.ptr;
         other.ptr = nullptr;

@@ -31,7 +31,7 @@ void fun2(queue<int>& q)
     for (int i = 0;i < 10;++i)
     {
         auto p = q.try_pop();
-        if (p != nullptr)
+        if (p.get() != nullptr)
             printf("try_pop() : %d \n", *p);
         else
             printf("try_pop() :  \n");
@@ -58,7 +58,7 @@ int main()
         cout << (*p).data << endl;
     }
     auto p = q.try_pop();
-    bool isNull = (p == nullptr);
+    bool isNull = (p.get() == nullptr);
     cout << "p is nullptr ? :" << isNull << endl;
 
     queue<int> q_int;
