@@ -12,7 +12,7 @@
 
 namespace Tiny_STL
 {
-template<class Key, class Compare = less<Key>, class Alloc = __default_alloc>
+template<class Key, class Compare = less<Key>, class Alloc = __malloc_alloc>
 class set
 {
 public:

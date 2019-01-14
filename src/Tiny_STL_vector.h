@@ -12,7 +12,7 @@
 
 namespace Tiny_STL
 {
-template<class T, class Alloc = __default_alloc>
+template<class T, class Alloc = __malloc_alloc>
 class vector
 {
 //型别定义

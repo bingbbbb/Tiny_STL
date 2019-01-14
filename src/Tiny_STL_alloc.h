@@ -1,7 +1,7 @@
 #ifndef TINY_STL_ALLOC_H
 #define TINY_STL_ALLOC_H
 
-#include<iostream> 
+#include <iostream> 
 #include <stddef.h>     //size_t
 #include <malloc.h>     //malloc()
 
@@ -15,7 +15,10 @@ namespace Tiny_STL
  * 容器直接使用simple_alloc类，该类的成员函数都是转调用第一级或第二级的配置器，
  * 由模板参数Alloc选择配置器。
  */
-template<class T, class Alloc>
+class __malloc_alloc;
+class __default_alloc;
+
+template<class T, class Alloc = __malloc_alloc>
 class simple_alloc
 {
 public:

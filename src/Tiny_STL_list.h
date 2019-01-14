@@ -69,7 +69,7 @@ struct __list_iterator
     }
 };
 
-template<class T, class Alloc = __default_alloc>
+template<class T, class Alloc = __malloc_alloc>
 class list
 {
 public:

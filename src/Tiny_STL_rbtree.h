@@ -154,7 +154,7 @@ struct pair
 
 };
 
-template<class Key, class Value, class KeyOfValue, class Compare, class Alloc = __default_alloc>
+template<class Key, class Value, class KeyOfValue, class Compare, class Alloc = __malloc_alloc>
 class rb_tree
 {
 public:

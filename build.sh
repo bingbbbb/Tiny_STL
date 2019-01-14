@@ -11,4 +11,4 @@ fi
 cd build
 cmake ..
 make
-../bin/test_queue
+#../bin/test_queue

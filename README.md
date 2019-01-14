@@ -63,3 +63,11 @@ TODO： enable_shared_from_this
 #### 线程安全queue  
 提供 try_pop(), wait_and_pop(), push(), empty()等函数。  
 底层使用智能指针 my_shared_ptr 和 my_unique_ptr 进行内存管理。  
+
+## 其他  
+### 内存泄漏测试  
+使用valgrind进行测试  
+>   sudo apt install valgrind  
+>   valgrind --tool=memcheck --leak-check=yes --show-reachable=yes  ./bin/test_ptr  
+  
+结果会有 still reachable: 72,704 bytes in 1 blocks 的总结，个人理解这是标准库为了快速运行而设置的内存池，并且没有释放。经过测试，包含 iostream 头文件但不写其他代码也有这个情况，(https://stackoverflow.com/questions/30376601/valgrind-memory-still-reachable-with-trivial-program-using-iostream/)
