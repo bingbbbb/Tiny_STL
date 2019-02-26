@@ -29,7 +29,7 @@ public:
     queue() : head(new node), tail(head.get()) {}
     ~queue() {};
     queue(const queue& other) = delete;
-    queue& operator-(const queue& other) = delete;
+    queue& operator=(const queue& other) = delete;
     my_shared_ptr<T> try_pop();
     my_shared_ptr<T> wait_and_pop();
     void push(T x);
