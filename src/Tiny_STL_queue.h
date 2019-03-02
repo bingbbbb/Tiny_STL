@@ -64,7 +64,8 @@ template<class T>
 my_shared_ptr<T> queue<T>::wait_and_pop()
 {
     std::unique_lock<std::mutex> head_lock(head_m);
-    cond.wait(head_lock, [&]{return head.get() != get_tail();});
+    while (head.get() == get_tail())        //避免虚假唤醒
+        cond.wait(head_lock);
     my_unique_ptr<node> old_head = std::move(head);
     head = std::move(old_head->next);
     return old_head.get()->data;
